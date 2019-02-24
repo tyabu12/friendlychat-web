@@ -168,7 +168,18 @@ function saveMessagingDeviceToken() {
 
 // Requests permissions to show notifications.
 function requestNotificationsPermissions() {
-  // TODO 11: Request permissions to send notifications.
+  // Request permissions to send notifications.
+  console.log("Requesting notifications permission...");
+  firebase
+    .messaging()
+    .requestPermission()
+    .then(() => {
+      // Notification permission granted.
+      saveMessagingDeviceToken();
+    })
+    .catch(error => {
+      console.error("Unable to get permission to notify.", error);
+    });
 }
 
 // Triggered when a file is selected via the media picker.
